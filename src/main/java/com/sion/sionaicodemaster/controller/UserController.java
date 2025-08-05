@@ -10,10 +10,7 @@ import com.sion.sionaicodemaster.contant.UserConstant;
 import com.sion.sionaicodemaster.exception.BusinessException;
 import com.sion.sionaicodemaster.exception.ErrorCode;
 import com.sion.sionaicodemaster.exception.ThrowUtils;
-import com.sion.sionaicodemaster.model.dto.UserAddRequest;
-import com.sion.sionaicodemaster.model.dto.UserQueryRequest;
-import com.sion.sionaicodemaster.model.dto.UserRegisterRequest;
-import com.sion.sionaicodemaster.model.dto.UserUpdateRequest;
+import com.sion.sionaicodemaster.model.dto.*;
 import com.sion.sionaicodemaster.model.entity.User;
 import com.sion.sionaicodemaster.model.vo.LoginUserVO;
 import com.sion.sionaicodemaster.model.vo.UserVO;
@@ -49,10 +46,10 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public BaseResponse<LoginUserVO> userLogin(@RequestBody User user, HttpServletRequest request) {
-        ThrowUtils.throwIf(user == null, ErrorCode.PARAMS_ERROR);
-        String userAccount = user.getUserAccount();
-        String userPassword = user.getUserPassword();
+    public BaseResponse<LoginUserVO> userLogin(@RequestBody UserLoginRequest userLoginRequest, HttpServletRequest request) {
+        ThrowUtils.throwIf(userLoginRequest == null, ErrorCode.PARAMS_ERROR);
+        String userAccount = userLoginRequest.getUserAccount();
+        String userPassword = userLoginRequest.getUserPassword();
         LoginUserVO loginUserVO = userService.userLogin(userAccount, userPassword, request);
         return ResultUtils.success(loginUserVO);
     }
