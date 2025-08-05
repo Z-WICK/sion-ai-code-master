@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @PostMapping("login")
-    public BaseResponse<LoginUserVO> login(@RequestBody User user, HttpServletRequest request) {
+    public BaseResponse<LoginUserVO> userLogin(@RequestBody User user, HttpServletRequest request) {
         ThrowUtils.throwIf(user == null, ErrorCode.PARAMS_ERROR);
         String userAccount = user.getUserAccount();
         String userPassword = user.getUserPassword();
